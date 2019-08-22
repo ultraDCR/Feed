@@ -40,10 +40,14 @@ public class SinglePost extends AppCompatActivity {
     TextView title, creator, c_date, content;
     ImageView pic;
     String token;
+    private RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_post);
+
+        requestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         Intent intent = getIntent();
         token = intent.getStringExtra("token");
@@ -60,11 +64,8 @@ public class SinglePost extends AppCompatActivity {
     }
 
     private void getdate(String postid) {
-        RequestQueue requestQueue = Volley.newRequestQueue(SinglePost.this);
             String URL = "http://103.1.92.237:8080/feed/post/"+postid;
             //String URL = "http://103.1.92.237:8080/auth/login";
-
-
 
             JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
                 @Override

@@ -64,12 +64,16 @@ public class NewPost extends AppCompatActivity {
     Uri filePath;
     String file,image;
     String token,userId;
+    private RequestQueue requestQueue;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
+
+        requestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
+
 
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
@@ -136,7 +140,6 @@ public class NewPost extends AppCompatActivity {
     }
 
     private void updatePost(String nTitle, String nContent, String image, String postid) {
-        RequestQueue requestQueue = Volley.newRequestQueue(NewPost.this);
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("title", nTitle);
@@ -278,11 +281,8 @@ public class NewPost extends AppCompatActivity {
     }
 
     private void getdate(String postid) {
-        RequestQueue requestQueue = Volley.newRequestQueue(NewPost.this);
         String URL = "http://103.1.92.237:8080/feed/post/"+postid;
         //String URL = "http://103.1.92.237:8080/auth/login";
-
-
 
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override

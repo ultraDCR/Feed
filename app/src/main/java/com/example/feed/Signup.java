@@ -29,10 +29,14 @@ import java.io.UnsupportedEncodingException;
 
 public class Signup extends AppCompatActivity {
 
+    private RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        requestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         EditText email = findViewById(R.id.email_field);
         EditText password = findViewById(R.id.password_field);
@@ -56,11 +60,9 @@ public class Signup extends AppCompatActivity {
     }
 
     private void signupSend(String uname, String pass,String name) {
-        RequestQueue requestQueue = Volley.newRequestQueue(Signup.this);
 
         try {
             String URL = "http://103.1.92.237:8080/auth/signup";
-            //String URL = "http://103.1.92.237:8080/auth/login";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("email", uname);
             jsonBody.put("password", pass);

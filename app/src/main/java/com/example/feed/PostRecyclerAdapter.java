@@ -144,7 +144,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
 
         public void deletePost(String id,int  i) {
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            RequestQueue requestQueue = VolleySingleton.getInstance(context).getmRequestQueue();
+
 
             String URL = "http://103.1.92.237:8080/feed/post/" + id;
             //String URL = "http://103.1.92.237:8080/auth/login";

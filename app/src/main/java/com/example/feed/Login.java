@@ -32,11 +32,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-
+private  RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        requestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         EditText email = findViewById(R.id.email_field_login);
         EditText password = findViewById(R.id.password_login);
@@ -57,8 +59,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginSend(String uname, String pass) {
-        RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
-
         try {
             String URL = "http://103.1.92.237:8080/auth/login";
             //String URL = "http://103.1.92.237:8080/auth/login";

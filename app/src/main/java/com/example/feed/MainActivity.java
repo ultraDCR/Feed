@@ -34,11 +34,13 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         Button login = findViewById(R.id.login_button);
         Button signup = findViewById(R.id.create_acc_btn);
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkauth(String token) {
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         try {
             String URL = "http://103.1.92.237:8080/feed/checkauth";
 

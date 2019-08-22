@@ -70,7 +70,7 @@ public class Home extends AppCompatActivity {
         Intent intent = getIntent();
         token = intent.getStringExtra("token");
         userid = intent.getStringExtra("userid");
-
+        rq = VolleySingleton.getInstance(this).getmRequestQueue();
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
 
         mSocket.on("posts", onNewMessage);
@@ -113,7 +113,7 @@ public class Home extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.feed_rview);
-        rq = Volley.newRequestQueue(this);
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
